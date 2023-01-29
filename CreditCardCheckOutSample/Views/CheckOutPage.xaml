@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CreditCardCheckOutSample.Views.CheckOutPage"
+             xmlns:local="clr-namespace:CreditCardCheckOutSample"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             Title="CheckOutPage">
+    <VerticalStackLayout>
+        <tabView:SfTabView x:Name="tabView" IndicatorBackground="Silver">
+            <tabView:SfTabView.Items>
+                <tabView:SfTabItem Header="Cards" FontAttributes="Bold" TextColor="{AppThemeBinding Light=Black, Dark=White}">
+                    <tabView:SfTabItem.Content>
+                        <!--1. First page -->
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" VerticalOptions="Start" Margin="30,0">
+                            <!-- Card list--> 
+                             <syncfusion:SfListView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                                ItemsSource="{Binding Cards}" 
+                                                ItemSize="350"
+                                                ItemSpacing="5"
+                                                ScrollBarVisibility="Never"
+                                                HeightRequest="250"
+                                                Orientation="Horizontal"
+                                                VerticalOptions="Start"
+                                                HorizontalOptions="Start">
+                                <syncfusion:SfListView.ItemTemplate>
+                                    <DataTemplate> 
+                                        <Image Source="{Binding Picture}" Aspect="AspectFit" />
+                                    </DataTemplate>
+                                </syncfusion:SfListView.ItemTemplate>
+                             </syncfusion:SfListView> 
+
+                            <!-- Button: Add new Card-->  
+                            <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,20" Stroke="#dadada" HorizontalOptions="FillAndExpand"
+                                StrokeThickness="3" StrokeDashArray="1.5" StrokeDashOffset="2"
+                                StrokeShape="RoundRectangle 10,10,10,10" HeightRequest="50">
+                                <Button Text="Add new card" FontSize="15" ImageSource="{AppThemeBinding Light=add_black, Dark=add_white}" TextColor="{AppThemeBinding Light=#505050, Dark=white}" BackgroundColor="Transparent"/>
+                            </Border>
+
+                            <!-- Separator--> 
+                            <BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" HeightRequest="1" Color="#f4f3f4" Margin="0,5,0,30"/>
+
+                            <!-- Details: Address & Date-->
+
+                            <!-- Address -->
+                            <Border Grid.Row="3" Grid.Column="0" Margin="0,0,0,20" Stroke="Transparent" HorizontalOptions="Start" BackgroundColor="#f2f2f2" HeightRequest="65" WidthRequest="65" StrokeShape="RoundRectangle 10,10,10,10">
+                                <Image Source="location" HeightRequest="40" WidthRequest="40"/>
+                            </Border>
+                            <Label Grid.Row="3" Grid.Column="1" FontSize="15" TextColor="#777777" Text="10506 - 4904 Deans Lane - Bedford Village - New York - US"/>
+                             <!-- Date -->
+                            <Border Grid.Row="4" Grid.Column="0" Margin="0,0,0,20" Stroke="Transparent" HorizontalOptions="Start"  BackgroundColor="#f2f2f2" HeightRequest="65" WidthRequest="65" StrokeShape="RoundRectangle 10,10,10,10">
+                                <Image Source="truck" HeightRequest="40" WidthRequest="40"/>
+                            </Border>
+                            <Label Grid.Row="4" Grid.Column="1" FontSize="15" TextColor="#777777" Text="Wednesday 04:00 PM"/>
+
+                            <!-- Invoice information-->
+                            <syncfusion:SfListView Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                                                    ItemsSource="{Binding Invoice}"  
+                                                    ScrollBarVisibility="Never"
+                                                    ItemSize="30"
+                                                    HeightRequest="110"
+                                                    HorizontalOptions="FillAndExpand" 
+                                                    Orientation="Vertical">
+                                <syncfusion:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="*,*">
+                                            <Label Grid.Column="0" Text="{Binding Description}" TextColor="#7e7e7e" FontSize="16" />
+                                            <Label Grid.Column="1" Text="{Binding Price}" FontSize="16" HorizontalTextAlignment="End"/>
+                                        </Grid> 
+                                    </DataTemplate>
+                                </syncfusion:SfListView.ItemTemplate>
+
+                            </syncfusion:SfListView>
+                            <!-- Total Price-->
+
+                            <Label Grid.Row="6" Grid.Column="0" Text="Total Price" FontSize="20" FontAttributes="Bold"/>
+                            <Label Grid.Row="6" Grid.Column="1" Text="235.35$" FontSize="20" HorizontalTextAlignment="End"/>
+
+                            <!-- Add Button--> 
+                            <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="50" CornerRadius="10"
+                                        Margin="0,25,0,0" BackgroundColor="#333333" Text="Pay" TextColor="White"/>
+
+                        </Grid>
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+
+                <tabView:SfTabItem Header="New Cards" FontAttributes="Bold" TextColor="{AppThemeBinding Light=Black, Dark=White}">
+                    <tabView:SfTabItem.Content>
+                       <ScrollView>
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                                  ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="10" Margin="30,30,30,0" VerticalOptions="CenterAndExpand">
+
+                                <!-- Main image--> 
+                                <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="ccardbase" Aspect="AspectFit" HeightRequest="250" />
+
+                                 <!--Card information-->
+
+                                <!--Card Name-->
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Card Name"/>
+                                <Entry Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Placeholder="My VISA Card" PlaceholderColor="Silver"/>
+
+                                 <!--Card Number-->
+                                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="Card Number"/>
+                                <Entry Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Placeholder="4000-1234-5678-9010" PlaceholderColor="Silver"/>
+
+                                 <!--Exp. Date-->
+                                <Label Grid.Row="5" Grid.Column="0" Text="Exp. Date"/>
+                                <Entry Grid.Row="6" Grid.Column="0" />
+
+                                 <!--CVV-->
+                                <Label Grid.Row="5" Grid.Column="1" Text="CVV"/>
+                                <Entry Grid.Row="6" Grid.Column="1" />
+
+                                <!--Password-->
+                                <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Password " TextColor="{AppThemeBinding Light=#505050, Dark=white}" />
+                                             <Span Text=" (Optional)" TextColor="Silver"/>
+                                        </FormattedString> 
+                                    </Label.FormattedText>
+                                </Label>
+                                <Entry Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" IsPassword="True"/>
+
+                                 <!--Pay Button--> 
+                                <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="50" CornerRadius="10"
+                                        Margin="0,10,0,0" BackgroundColor="#333333" Text="Add" TextColor="White"/>
+
+                            </Grid>
+                        </ScrollView>
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+
+            </tabView:SfTabView.Items>
+        </tabView:SfTabView>
+    </VerticalStackLayout>
+</ContentPage>
